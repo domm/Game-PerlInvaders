@@ -40,11 +40,11 @@ my $shot;
 while (1) {
     while ($app->event->poll) {
         my $type = $app->event->type;
-        exit if ($type == SDL_QUIT);
-        exit if ($type == SDL_KEYDOWN && $app->event->key_name eq 'escape');
+        exit if ($type == SDL_QUIT());
+        exit if ($type == SDL_KEYDOWN() && $app->event->key_name eq 'escape');
     
         my $key = $app->event->key_name();
-        if ($type == SDL_KEYDOWN) {
+        if ($type == SDL_KEYDOWN()) {
             given ($key) {
                 when ('right') { $dir_x=1 }
                 when ('left') { $dir_x=-1 }
@@ -62,7 +62,7 @@ while (1) {
                 }
             }
         }
-        if ($type == SDL_KEYUP) {
+        if ($type == SDL_KEYUP()) {
             given ($key) {
                 when ('right') { $dir_x=0 }
                 when ('left') { $dir_x=0 }
