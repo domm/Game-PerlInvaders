@@ -1,14 +1,14 @@
 use 5.010; use strict; use warnings;
 use SDL::App;
 use SDL::Event;
-use PerlInvaders::Sprite;
-use PerlInvaders::App;
+use Game::PerlInvaders::Sprite;
+use Game::PerlInvaders::App;
 
-my $app=PerlInvaders::App->new(
+my $app=Game::PerlInvaders::App->new(
     background_image=>'stuff/stars.png',
 );
 
-my $onion = PerlInvaders::Sprite->new(
+my $onion = Game::PerlInvaders::Sprite->new(
     image=>'onion.png',
     position_x      => int(rand($app->background->width / 2)),
 );
@@ -35,7 +35,7 @@ while (1) {
                 when ('space') {
                     unless ($app->shooting) {
                         $app->shooting(1);
-                        $shot= PerlInvaders::Sprite->new(
+                        $shot= Game::PerlInvaders::Sprite->new(
                             position_x=>$onion->rect->x + int($onion->surface->width / 2),
                             position_y=>$onion->rect->y,
                             direction_x=>0,

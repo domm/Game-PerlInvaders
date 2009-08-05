@@ -1,4 +1,4 @@
-package PerlInvaders::Sprite;
+package Game::PerlInvaders::Sprite;
 use Moose;
 
 # TODO contain x/y via Type/Constraint?
