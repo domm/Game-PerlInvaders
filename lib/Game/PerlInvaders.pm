@@ -25,6 +25,11 @@ using Perl and SDL.
 As I'm far from a SDL expert, the implementation might suck. If so, 
 patches welcome!
 
+Installation currently does not work, so you should run PerlInvaders 
+in the project directory:
+  
+  perl -Ilib bin/perl_invaders.pl
+
 =head1 AUTHOR
 
 Thomas Klausner E<lt>domm {at} cpan.orgE<gt>
