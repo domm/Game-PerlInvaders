@@ -30,7 +30,7 @@ sub load_enemies {
     my $pos=20;
     
     foreach my $cnt (1 .. $count) {
-        my $e =PerlInvaders::Sprite::Enemy->new({
+        my $e =PerlInvaders::Sprite->new({
             image=>'enemy.png',
             position_x=>$pos,
             position_y=>20,

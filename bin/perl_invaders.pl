@@ -1,7 +1,7 @@
 use 5.010; use strict; use warnings;
 use SDL::App;
 use SDL::Event;
-use PerlInvaders::Sprite::Enemy;
+use PerlInvaders::Sprite;
 use PerlInvaders::App;
 
 my $app=PerlInvaders::App->new(
