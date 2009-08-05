@@ -132,10 +132,7 @@ sub rects_overlap {
 
 }
 
-
-
-
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
-
+q{ listening to: various talks at YAPC::Europe 2009 }

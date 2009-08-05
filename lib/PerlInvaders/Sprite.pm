@@ -25,6 +25,7 @@ sub BUILD {
 }
 
 
+
 sub move_right {
     my $self = shift;
     $self->position_x($self->position_x + 1);
@@ -46,11 +47,8 @@ sub move_down {
     $self->position_y($self->position_y +1);
 }
 
-
 no Moose;
 __PACKAGE__->meta->make_immutable;
 
-
-
-
+q{ listening to: various talks at YAPC::Europe 2009 }
 
