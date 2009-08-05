@@ -7,6 +7,7 @@ has background => (is=>'rw',isa=>'SDL::Surface');
 has background_image => (is=>'rw',isa=>'Str',required=>1);
 has window=>(is=>'rw',isa=>'SDL::App');
 has shooting => (is=>'rw',isa=>'Bool');
+has enemies => (is=>'rw',isa=>'HashRef');
 
 sub BUILD {
     my $self = shift;
@@ -18,9 +19,31 @@ sub BUILD {
     -depth  => 16,
         
     ));
+    $self->background->blit( undef, $self->window, undef );
 
 }
 
+sub load_enemies {
+    my ($self, $count) = @_;
+    $count ||= 10;
+    my %enemies;
+    my $pos=20;
+    
+    foreach my $cnt (1 .. $count) {
+        my $e =PerlInvaders::Sprite::Enemy->new({
+            image=>'enemy.png',
+            position_x=>$pos,
+            position_y=>20,
+            direction_x=>1,
+            direction_y=>0,
+            name=>$cnt,
+        });
+        $pos+='50';
+        $self->draw_sprite($e);
+        $enemies{$cnt}=$e;
+    }
+    $self->enemies(\%enemies);
+}
 
 sub draw_sprite {
     my ($self, $sprite) = @_;
@@ -72,7 +95,7 @@ sub move_shot {
 }
 
 sub check_collision {
-    my ($self,$enemy,$shot,$enemies) = @_;
+    my ($self,$enemy,$shot) = @_;
     if ($self->rects_overlap($enemy->rect,$shot->rect)) {
         say "hit ".$enemy->name;
         $self->background->blit($shot->rect,$self->window,$shot->rect);
@@ -80,7 +103,7 @@ sub check_collision {
         $self->shooting(0);
         $self->background->blit($enemy->rect,$self->window,$enemy->rect);
         
-        delete $enemies->{$enemy->name};
+        delete $self->enemies->{$enemy->name};
     }
 }
 

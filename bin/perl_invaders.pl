@@ -7,7 +7,6 @@ use PerlInvaders::App;
 my $app=PerlInvaders::App->new(
     background_image=>'stuff/stars.png',
 );
-$app->background->blit( undef, $app->window, undef );
 
 my $onion = PerlInvaders::Sprite->new(
     image=>'onion.png',
@@ -18,23 +17,8 @@ $onion->rect->y($app->background->height - ($onion->surface->height +5));
 my $dir_x=0;
 my $dir_y=0;
 
-my %enemies;
-my $pos=20;
-foreach my $cnt (1..10) {
-    $enemies{$cnt} =PerlInvaders::Sprite::Enemy->new({
-        image=>'enemy.png',
-        position_x=>$pos,
-        position_y=>20,
-        direction_x=>1,
-        direction_y=>0,
-        name=>$cnt,
-    });
-    $pos+='50';
-}
+$app->load_enemies(10);
 
-foreach (sort keys %enemies) {
-    $app->draw_sprite($enemies{$_});
-}
 my $shot;
 
 while (1) {
@@ -70,11 +54,10 @@ while (1) {
         }
     }
 
-    say join(" ",keys %enemies);
-    foreach (sort keys %enemies) {
-        my $enemy = $enemies{$_};
+    foreach (sort keys %{$app->enemies}) {
+        my $enemy = $app->enemies->{$_};
         $app->move_like_a_space_invader($enemy);
-        $app->check_collision($enemy,$shot,\%enemies) if $app->shooting;
+        $app->check_collision($enemy,$shot) if $app->shooting;
         $app->draw_sprite($enemy);
     }
     if ($app->shooting && $shot) {
