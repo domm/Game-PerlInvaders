@@ -65,7 +65,7 @@ while (1) {
         $app->draw_sprite($shot);
     }
     
-    # move onion
+    # move onion TODO refactor
     $dir_x=0 if ($onion->rect->x >= ($app->background->width - 
     $onion->surface->width)) && $dir_x==1;
     $dir_x=0 if $onion->rect->x <= 0 && $dir_x == -1;
