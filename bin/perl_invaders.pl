@@ -1,6 +1,7 @@
 use 5.010; use strict; use warnings;
 use SDL::App;
 use SDL::Event;
+use SDL::Constants;
 use Game::PerlInvaders::Sprite;
 use Game::PerlInvaders::App;
 
