@@ -54,11 +54,18 @@ while (1) {
         }
     }
 
+    unless (keys %{$app->enemies}) {
+       # TODO nice "you won" screen
+       sleep(2);
+       say "YOU WON!!";
+       exit;
+    }
+
     foreach (sort keys %{$app->enemies}) {
         my $enemy = $app->enemies->{$_};
         $app->move_like_a_space_invader($enemy);
-        $app->check_collision($enemy,$shot) if $app->shooting;
         $app->draw_sprite($enemy);
+        $app->check_collision($enemy,$shot) if $app->shooting;
     }
     if ($app->shooting && $shot) {
         $app->move_shot($shot);

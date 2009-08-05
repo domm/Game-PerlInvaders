@@ -47,7 +47,7 @@ sub load_enemies {
 
 sub draw_sprite {
     my ($self, $sprite) = @_;
-
+    
     $self->background->blit($sprite->rect,$self->window,$sprite->rect);
     
     $sprite->rect->x($sprite->position_x);
@@ -62,7 +62,7 @@ sub move_like_a_space_invader {
     my $dir = $sprite->direction_x;
     if ($dir == '1') {
         if ($sprite->position_x <= ($self->background->width - 
-    $sprite->surface->width)) {
+        $sprite->surface->width)) {
             $sprite->move_right;
         }
         else {
@@ -97,12 +97,10 @@ sub move_shot {
 sub check_collision {
     my ($self,$enemy,$shot) = @_;
     if ($self->rects_overlap($enemy->rect,$shot->rect)) {
-        say "hit ".$enemy->name;
         $self->background->blit($shot->rect,$self->window,$shot->rect);
         undef $shot;
         $self->shooting(0);
         $self->background->blit($enemy->rect,$self->window,$enemy->rect);
-        
         delete $self->enemies->{$enemy->name};
     }
 }
